@@ -23,17 +23,17 @@ session_start();
 
 if(!isset ($_SESSION["timeStart"]))
 {
-  $_SESSION["timeStart"] = microtime_float();
+    $_SESSION["timeStart"] = microtime(true);
 }
 
 $CLIENT_SIGNATURE = isset($_POST['client_signature']) ? $_POST['client_signature'] : null;
 if(substr($CLIENT_SIGNATURE, 0, 22) === 'data:image/png;base64,' && strlen($CLIENT_SIGNATURE) > 200)
 {
-  $CLIENT_SIGNATURE = '<img id="hk" src="' . htmlspecialchars($CLIENT_SIGNATURE) . '" >';
+    $CLIENT_SIGNATURE = '<img id="hk" src="' . htmlspecialchars($CLIENT_SIGNATURE) . '" >';
 }
 else
 {
-  $CLIENT_SIGNATURE = null;
+    $CLIENT_SIGNATURE = null;
 }
 
 $lines = file(__FILE__);
@@ -43,27 +43,27 @@ $DEV_SIGNATURE = trim($lines[4]);
 $DEV_SIGNATURE = '<img id="dev_signature" src="' . $DEV_SIGNATURE . '" >';
 
 $Path = "Signed_contracts/";
-$randFileName = rand(10,15000);
+$FileName = sha1($_SESSION["timeStart"]);
 $phpName = basename($_SERVER['PHP_SELF']) ? basename($_SERVER['PHP_SELF']) : 'index.php';
-$fileName = $randFileName;
+$fileName = $FileName;
 $htmlName = $fileName . '.html';
 
 function getBrowser()
 {
-  $user_agent = $_SERVER['HTTP_USER_AGENT'];
-  $browser = "N/A";
+    $user_agent = $_SERVER['HTTP_USER_AGENT'];
+    $browser = "N/A";
 
-  $browsers = array('/msie/i' => 'Internet explorer', '/firefox/i' => 'Firefox', '/safari/i' => 'Safari', '/chrome/i' => 'Chrome', '/edge/i' => 'Edge', '/opera/i' => 'Opera', '/mobile/i' => 'Mobile browser');
+    $browsers = array('/msie/i' => 'Internet explorer', '/firefox/i' => 'Firefox', '/safari/i' => 'Safari', '/chrome/i' => 'Chrome', '/edge/i' => 'Edge', '/opera/i' => 'Opera', '/mobile/i' => 'Mobile browser');
 
-  foreach($browsers as $regex => $value)
-  {
-    if(preg_match($regex, $user_agent))
+    foreach($browsers as $regex => $value)
     {
-      $browser = $value;
+        if(preg_match($regex, $user_agent))
+        {
+            $browser = $value;
+        }
     }
-  }
 
-  return $browser;
+    return $browser;
 }
 
 $browserName = getBrowser();
@@ -71,11 +71,11 @@ $browserName = getBrowser();
 // If the filename is (or starts with) "test" or "demo" the PHP file won't delete itself, nor will it redirect to the HTML contract (when one exists)
 if(true && $phpName == 'test.php')
 {
-  $selfDelete = 0;
+    $selfDelete = 0;
 }
 else
 {
-  $selfDelete = 1;
+    $selfDelete = 1;
 }
 
 /**
@@ -88,95 +88,8 @@ $HEADER = '<!DOCTYPE html>
 <title>Signed Contract</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="robots" content="noindex">
-<style>
-@import url(http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700,400italic);
-@import url(http://fonts.googleapis.com/css?family=Arapey);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800);
-body {
-    font-family: "Libre Baskerville", serif;
-    font-size:16px;
-    line-height:1.5em;
-    color:#000;
-    margin:0;
-    background:#fff;
-}
-@media (max-width:600px) {
-    body { font-size:14px; }
-}
-@media print {
-   .noprint { display:none !important; }
-}
-.hidden {
-    display:none;
-}
-#content {
-    max-width: 600px;
-    margin: 0 auto;
-    margin-bottom: 3em;
-    padding: 0 2em;
-    background: #fff;
-}
-h1 {
-    font-size: 2em;
-    line-height: 1.2em;
-    letter-spacing: 0.15em;
-    font-family: "Arapey", serif;
-    font-weight: normal;
-    margin: 1em 0;
-    position: relative;
-    text-align: center;
-    text-transform: uppercase;
-    padding: .5em 0;
-}
-h2 {
-    font-size:1.2em;
-    line-height:1.2em;
-    letter-spacing:.05em;
-    font-family:"Open Sans Condensed",sans-serif;
-    font-weight:700;
-}
-#signature {
-    width:auto;
-    border:dashed 2px #53777A;
-    margin:0;
-    text-align:center;
-}
-#hk,
-#dev_signature {
-    max-width:333px;
-    display:block;
-}
-#date-ip {
-    font-size:1.2em;
-    line-height:1.2em;
-    letter-spacing:.05em;
-    font-family:"Open Sans Condensed",sans-serif;
-    font-weight:400;
-}
-#print-pdf {
-    text-align:center;
-    padding:1.5em 0;
-    margin-top:2em;
-    border-top:solid 1px #ccc;
-}
-.buttons {
-    text-align:center;
-    margin:1.5em auto;
-}
-button {
-    margin: 0 .5em;
-    font-size:1.2em;
-    line-height:1.5em;
-    font-family: "Open Sans Condensed",sans-serif;
-    font-weight: 700;
-    text-transform:uppercase;
-    color: #0a3666;
-}
-button:hover {
-    color: #136fd2;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="./style.css">
+
 </head>
 
 <body>
@@ -219,7 +132,7 @@ $FOOTER_UNSIGNED = '
     <div class="buttons">
       <button id="reset" type="button">Reset</button>
       <button id="submit" type="submit">Done &rarr;</button>
-      <p><?php echo $timeStart;?>Friday</p>
+      <p><?php echo $_SESSION["timeStart"];?>Friday</p>
     </div>
 
     <input type="hidden" id="client_signature" name="client_signature" />
@@ -271,15 +184,16 @@ $(document).ready(function() {
 
 if($CLIENT_SIGNATURE)
 {
-  $_SESSION["timeEnd"] = microtime(true);
+    $_SESSION["timeEnd"] = microtime(true);
 
-  $FOOTER_SIGNED_PHP = '
-  <?php $phpName  = basename($_SERVER["PHP_SELF"]) ? basename($_SERVER["PHP_SELF"]) : "index.php";
-  $fileName = $randFileName;
+    $FOOTER_SIGNED_PHP = '
+  $phpName  = basename($_SERVER["PHP_SELF"]) ? basename($_SERVER["PHP_SELF"]) : "index.php";
+  $fileName = $FileName;
   $htmlName = $fileName.".html";
   $pdfName = $fileName.".pdf"; 
   ?>
-
+<head>
+</head>
   <div id="date-ip">
     <strong>Signed on:</strong> <?php echo date("j F Y g:i a"); ?>
     <br><strong>IP address:</strong>
@@ -290,7 +204,6 @@ if($CLIENT_SIGNATURE)
     <strong>Start Time:</strong><?php echo $_SESSION["timeStart"];?><br>
     <strong>End Time:</strong><?php echo $_SESSION["timeEnd"];?><br>
     <strong>Time Spent:</strong><?php echo $_SESSION["timeEnd"] - $_SESSION["timeStart"];?><br>
-    <stong>HTML Filename</stong><?php echo $htmlName; ?>
   </div>
 
   <?php // Function to get the client ip address
@@ -330,9 +243,7 @@ function printContract() {
   window.print();
 }
 function generatePdf() {
-  // http://pdfcrowd.com/save-to-pdf/
-    exec(escapeshellcmd(`wkhtmltopdf ${htmfile} ${htmfile}.pdf`);
-}
+    window.location.href = "print.php?$htmlName";
 </script>
 
 </body>
@@ -340,71 +251,72 @@ function generatePdf() {
 }
 else
 {
-  $FOOTER_SIGNED_PHP = null;
+    $FOOTER_SIGNED_PHP = null;
 }
 
 
 if($CLIENT_SIGNATURE == null)
 {
-  if($selfDelete && file_exists($htmlName))
-  {
-    header('Location: ' . $htmlName . '#hk');
-    die();
-  }
-  /** Waiting for Client to sign: include signature elements and javascript **/
-  echo $HEADER;
-  echo $CONTRACT_HTML;
-  echo $DEV_SIGNATURE;
-  eval (' ?>' . $FOOTER_UNSIGNED . '<?php ');
+    if($selfDelete && file_exists($htmlName))
+    {
+        header('Location: ' . $htmlName . '#hk');
+        die();
+    }
+    /** Waiting for Client to sign: include signature elements and javascript **/
+    echo $HEADER;
+    echo $CONTRACT_HTML;
+    echo $DEV_SIGNATURE;
+    eval (' ?>' . $FOOTER_UNSIGNED . '<?php ');
 }
 else
 {
-  /** Contract was just signed: put $CLIENT_SIGNATURE and the other parts in the .html file **/
-  $HTML_file_location = $Path . $htmlName;
-  file_put_contents($HTML_file_location, $HEADER);
-  file_put_contents($HTML_file_location, $CONTRACT_HTML, FILE_APPEND | LOCK_EX);
-  file_put_contents($HTML_file_location, $DEV_SIGNATURE, FILE_APPEND | LOCK_EX);
-  file_put_contents($HTML_file_location, $CLIENT_SIGNATURE, FILE_APPEND | LOCK_EX);
-  ob_start();
-  eval($FOOTER_SIGNED_PHP); // https://cgd.io/2008/how-to-execute-php-code-in-a-php-string/
-  $FOOTER_SIGNED_COMPILED = ob_get_contents();
-  ob_end_clean();
-  file_put_contents($HTML_file_location, $FOOTER_SIGNED_COMPILED, FILE_APPEND | LOCK_EX);
+    /** Contract was just signed: put $CLIENT_SIGNATURE and the other parts in the .html file **/
+    $HTML_file_location = $Path . $htmlName;
+    file_put_contents($HTML_file_location, $HEADER);
+    file_put_contents($HTML_file_location, $CONTRACT_HTML, FILE_APPEND | LOCK_EX);
+    file_put_contents($HTML_file_location, $DEV_SIGNATURE, FILE_APPEND | LOCK_EX);
+    file_put_contents($HTML_file_location, $CLIENT_SIGNATURE, FILE_APPEND | LOCK_EX);
+    ob_start();
+    eval($FOOTER_SIGNED_PHP); // https://cgd.io/2008/how-to-execute-php-code-in-a-php-string/
+    $FOOTER_SIGNED_COMPILED = ob_get_contents();
+    ob_end_clean();
+    file_put_contents($HTML_file_location, $FOOTER_SIGNED_COMPILED, FILE_APPEND | LOCK_EX);
 
-  // Email client & dev, delete php, redirect to html
-  if($clientEmail)
-  {
-    $headers = "From: " . $devEmail . "\r\n";
-    $headers .= "MIME-Version: 1.0\r\n";
-    $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-    $msg = 'The contract was signed. You can <a href="' . getUrl() . '">view or download this contract from here</a>.';
-    mail($clientEmail, 'Contract signed', $msg, $headers);
-  }
-  if($devEmail)
-  {
-    $headers = "From: " . $clientEmail . "\r\n";
-    $headers .= "MIME-Version: 1.0\r\n";
-    $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-    $msg = '<p>A new contract was signed. You can <a href="' . getUrl() . '">view or download this contract from here</a>.</p>';
-    $msg .= 'The contract was signed by: ' . $clientEmail;
-    mail($devEmail, 'Contract signed!', $msg, $headers);
-  }
-  if($selfDelete)
-  {
-    unlink(__FILE__);
-  }
-  header('location: ' . $HTML_file_location . '#hk');
-  die();
+    // Email client & dev, delete php, redirect to html
+    if($clientEmail)
+    {
+        $headers = "From: " . $devEmail . "\r\n";
+        $headers .= "MIME-Version: 1.0\r\n";
+        $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+        $msg = 'The contract was signed. You can <a href="' . getUrl() . '">view or download this contract from here</a>.';
+        mail($clientEmail, 'Contract signed', $msg, $headers);
+    }
+    if($devEmail)
+    {
+        $headers = "From: " . $clientEmail . "\r\n";
+        $headers .= "MIME-Version: 1.0\r\n";
+        $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+        $msg = '<p>A new contract was signed. You can <a href="' . getUrl() . '">view or download this contract from here</a>.</p>';
+        $msg .= 'The contract was signed by: ' . $clientEmail;
+        mail($devEmail, 'Contract signed!', $msg, $headers);
+    }
+    if($selfDelete)
+    {
+        unlink(__FILE__);
+    }
+    session_destroy();
+    header('location: ' . $HTML_file_location . '#hk');
+    die();
 }
 
 // Get the current file URL and replaces the .php extension with .html
 function getUrl()
 {
-  $url = @($_SERVER["HTTPS"] != 'on') ? 'http://' . $_SERVER["SERVER_NAME"] : 'https://' . $_SERVER["SERVER_NAME"];
-  $url .= ($_SERVER["SERVER_PORT"] !== 80) ? ":" . $_SERVER["SERVER_PORT"] : "";
-  $url .= $_SERVER["REQUEST_URI"];
-  $url = substr($url, 0, -4) . '.html';
-  return $url;
+    $url = @($_SERVER["HTTPS"] != 'on') ? 'http://' . $_SERVER["SERVER_NAME"] : 'https://' . $_SERVER["SERVER_NAME"];
+    $url .= ($_SERVER["SERVER_PORT"] !== 80) ? ":" . $_SERVER["SERVER_PORT"] : "";
+    $url .= $_SERVER["REQUEST_URI"];
+    $url = substr($url, 0, -4) . '.html';
+    return $url;
 }
 
 ?>
