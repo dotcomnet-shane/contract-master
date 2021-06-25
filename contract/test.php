@@ -42,7 +42,7 @@ $devEmail = trim($lines[2]);
 $DEV_SIGNATURE = trim($lines[4]);
 $DEV_SIGNATURE = '<img id="dev_signature" src="' . $DEV_SIGNATURE . '" >';
 
-$Path = "Signed_contracts/";
+$Path = "dompdf/toPrint/signedContracts/";
 $FileName = sha1($_SESSION["timeStart"]);
 $phpName = basename($_SERVER['PHP_SELF']) ? basename($_SERVER['PHP_SELF']) : 'index.php';
 $fileName = $FileName;
@@ -132,7 +132,7 @@ $FOOTER_UNSIGNED = '
     <div class="buttons">
       <button id="reset" type="button">Reset</button>
       <button id="submit" type="submit">Done &rarr;</button>
-      <p><?php echo $_SESSION["timeStart"];?>Friday</p>
+      <p><?php echo date("d-m-yy h:m");?></p>
     </div>
 
     <input type="hidden" id="client_signature" name="client_signature" />
@@ -201,9 +201,7 @@ if($CLIENT_SIGNATURE)
     <strong>Browser:</strong><?php echo $browserName;?><br>
     <strong>PC Name:</strong><?php echo gethostname();?><br>
     <strong>Operating System:</strong><?php echo PHP_OS;?><br>
-    <strong>Start Time:</strong><?php echo $_SESSION["timeStart"];?><br>
-    <strong>End Time:</strong><?php echo $_SESSION["timeEnd"];?><br>
-    <strong>Time Spent:</strong><?php echo $_SESSION["timeEnd"] - $_SESSION["timeStart"];?><br>
+    <strong>Time Spent:</strong><?php echo substr((($_SESSION["timeEnd"] - $_SESSION["timeStart"]) / 60) ,0,4) . " Minutes";?><br>
   </div>
 
   <?php // Function to get the client ip address
@@ -283,23 +281,23 @@ else
     file_put_contents($HTML_file_location, $FOOTER_SIGNED_COMPILED, FILE_APPEND | LOCK_EX);
 
     // Email client & dev, delete php, redirect to html
-    if($clientEmail)
-    {
-        $headers = "From: " . $devEmail . "\r\n";
-        $headers .= "MIME-Version: 1.0\r\n";
-        $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-        $msg = 'The contract was signed. You can <a href="' . getUrl() . '">view or download this contract from here</a>.';
-        mail($clientEmail, 'Contract signed', $msg, $headers);
-    }
-    if($devEmail)
-    {
-        $headers = "From: " . $clientEmail . "\r\n";
-        $headers .= "MIME-Version: 1.0\r\n";
-        $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-        $msg = '<p>A new contract was signed. You can <a href="' . getUrl() . '">view or download this contract from here</a>.</p>';
-        $msg .= 'The contract was signed by: ' . $clientEmail;
-        mail($devEmail, 'Contract signed!', $msg, $headers);
-    }
+//    if($clientEmail)
+//    {
+//        $headers = "From: " . $devEmail . "\r\n";
+//        $headers .= "MIME-Version: 1.0\r\n";
+//        $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+//        $msg = 'The contract was signed. You can <a href="' . getUrl() . '">view or download this contract from here</a>.';
+//        mail($clientEmail, 'Contract signed', $msg, $headers);
+//    }
+//    if($devEmail)
+//    {
+//        $headers = "From: " . $clientEmail . "\r\n";
+//        $headers .= "MIME-Version: 1.0\r\n";
+//        $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+//        $msg = '<p>A new contract was signed. You can <a href="' . getUrl() . '">view or download this contract from here</a>.</p>';
+//        $msg .= 'The contract was signed by: ' . $clientEmail;
+//        mail($devEmail, 'Contract signed!', $msg, $headers);
+//    }
     if($selfDelete)
     {
         unlink(__FILE__);

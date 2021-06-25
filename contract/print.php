@@ -1,19 +1,19 @@
 <?php
-namespace Dompdf;
-require_once './contract/dompdf/autoload.inc.php';
+require_once 'dompdf/autoload.inc.php';
+use Dompdf\Dompdf;
 
 ob_start();
-include('./contract/test.php');
 $content = ob_get_clean();
 
-if(isset($_GET['submit_val']))
-{
-    $dompdf = new Dompdf();
-    $dompdf-> file_get_contents($_GET["$htmlName"]);
-;
-    $dompdf->setPaper('A4', 'landscape');
-    $dompdf->render();
-    $dompdf->stream("",array("Attachment" => false));
-    exit(0);
-}
+$dompdf = new Dompdf();
+
+$res = $dompdf->getOptions();
+
+$dompdf->loadHtmlFile('/home/ali/PhpstormProjects/contract-master/contract/dompdf/toPrint/signedContracts/0f404e2e6efece32ea3ec20680efcc017a302ddf.html');
+
+$dompdf->setPaper('A4');
+$dompdf->render();
+$dompdf->stream();
+
+exit(0);
 ?>

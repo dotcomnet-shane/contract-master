@@ -42,7 +42,7 @@ $devEmail = trim($lines[2]);
 $DEV_SIGNATURE = trim($lines[4]);
 $DEV_SIGNATURE = '<img id="dev_signature" src="' . $DEV_SIGNATURE . '" >';
 
-$Path = "Signed_contracts/";
+$Path = "signedContracts/";
 $randFileName = rand(10,15000);
 $phpName = basename($_SERVER['PHP_SELF']) ? basename($_SERVER['PHP_SELF']) : 'index.php';
 $fileName = $randFileName;
