@@ -2,5 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/contract/dompdf/php-css-parser" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/contract/dompdf/php-font-lib" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/contract/dompdf/php-svg-lib" vcs="Git" />
   </component>
 </project>
