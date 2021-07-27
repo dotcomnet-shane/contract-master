@@ -1,57 +1,121 @@
 /*CSS File for generated signed document*/
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+/**
+ * General
+ */
+
 body {
-    font-family: "Libre Baskerville", serif;
+    text-rendering: optimizeLegibility;
+    font-family: 'Roboto', sans-serif;
     color:#000;
     margin:0;
-    background:#fff;
+    background: rgb(233, 233, 233) none repeat scroll 0 0;
 }
-@media (max-width:600px) {
-    body { font-size:14px; }
+
+body p {
+    font-size: 14px;
 }
-@media print,dompdf {
-    .noprint {
-        display:none !important;
-    }
-    @page {
-        size: A4;
-        margin: 0;
-    }
+
+ol > li {
+    font-size: 14px;
 }
-.hidden {
-    display:none;
+
+ul > li {
+    font-size: 14px;
 }
+
+/**
+ * Containers
+ */
+
+.page-wrapper {
+    display: block;
+    position: absolute;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    background-color: white;
+    height: 842px;
+    overflow-y: scroll;
+    top: 50px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
 #content {
     max-width: 600px;
-    margin: 0 auto;
-    margin-bottom: 3em;
+    margin: 0 auto 3em;
     padding: 0 2em;
     background: #fff;
 }
+
+/**
+ * Heading Styles
+ */
 h1 {
-    font-size: 2em;
-    line-height: 1.2em;
-    letter-spacing: 0.15em;
-    font-family: "Arapey", serif;
-    font-weight: normal;
-    margin: 1em 0;
-    position: relative;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 20px;
     text-align: center;
     text-transform: uppercase;
-    padding: .5em 0;
+    font-family: 'Roboto', sans-serif;
 }
+
 h2 {
-    font-size:1.2em;
-    line-height:1.2em;
-    letter-spacing:.05em;
-    font-family:"Open Sans Condensed",sans-serif;
-    font-weight:700;
+    font-size: 1em;
+    line-height: 1.2em;
+    letter-spacing: .05em;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
 }
+
+/**
+ * Button Classes
+ */
+.btn-primary {
+    outline: 0;
+    white-space: nowrap;
+    line-height: 1.42857;
+    touch-action: manipulation;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    text-transform:uppercase;
+    background: linear-gradient(#f9f9f9, #e1e1e1);
+    text-shadow: 1px 1px 1px #fff;
+    border-color: #ccc;
+    color: #ed1c24;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 10px 40px;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(#b6b6b6,#959595);
+    text-shadow: 1px 1px 1px #777;
+    color: #fff;
+    border-color: #888;
+}
+
+.buttons {
+    text-align:center;
+    margin:1.5em auto;
+    border: 1px solid transparent;
+}
+
+.hidden {
+    display:none;
+}
+
 #signature {
     width:auto;
     /*border:dashed 2px #53777A;*/
     margin:0;
     text-align:center;
 }
+
 #signatory {
     width:auto;
     border-top:dashed 2px #53777A;
@@ -60,34 +124,65 @@ h2 {
 }
 #hk,
 #dev_signature {
-    max-width:333px;
-    display:block;
+    max-width: 280px;
+    display: block;
 }
+
 #date-ip > p {
-    font-family:"Open Sans Condensed",sans-serif;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
     font-weight:400;
 }
+
+#date-ip {
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+}
+
 #print-pdf {
     text-align:center;
     padding:1.5em 0;
     margin-top:2em;
     border-top:solid 1px #ccc;
 }
-.buttons {
-    text-align:center;
-    margin:1.5em auto;
+
+/**
+ * Media Queries
+ */
+
+@media all {
+    .page-break {
+        display: none;
+    }
 }
-button {
-    margin: 0 .5em;
-    font-size:1.2em;
-    line-height:1.5em;
-    font-family: "Open Sans Condensed",sans-serif;
-    font-weight: 700;
-    text-transform:uppercase;
-    color: #0a3666;
+
+@media (max-width:600px) {
+    body { font-size:14px; }
 }
-button:hover {
-    color: #136fd2;
+
+@media print {
+    .page-break {
+        display: block;
+        page-break-before: always !important;
+    }
+}
+
+@media print,dompdf {
+    .noprint {
+        display: none !important;
+    }
+    .page-wrapper {
+        height: 100%;
+        border: none;
+    }
+    .page-break {
+        display: block;
+        page-break-before: always !important;
+    }
+    @page {
+        size: A4;
+        margin: 0;
+    }
 }
 
 /* arapey-regular - latin */

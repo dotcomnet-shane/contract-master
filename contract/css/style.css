@@ -1,51 +1,120 @@
-/*CSS File for showing document to sign*/
+/*
+ * CSS File for showing document to sign
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 body {
-    font-family: "Libre Baskerville", serif;
+    text-rendering: optimizeLegibility;
+    font-family: 'Roboto', sans-serif;
     color:#000;
     margin:0;
-    background:#fff;
+    background: rgb(233, 233, 233) none repeat scroll 0 0;
 }
-@media (max-width:600px) {
-    body { font-size:14px; }
+
+/**
+ * Button Classes
+ */
+.btn-primary {
+    outline: 0;
+    white-space: nowrap;
+    line-height: 1.42857;
+    touch-action: manipulation;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    text-transform:uppercase;
+    background: linear-gradient(#f9f9f9, #e1e1e1);
+    text-shadow: 1px 1px 1px #fff;
+    border-color: #ccc;
+    color: #ed1c24;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 10px 40px;
+    margin: 20px 0;
+    border-radius: 4px;
 }
-@media print,dompdf {
-    .noprint {
-        display:none !important;
-    }
-    @page {
-        size: A4;
-        margin: 0;
-    }
+
+.btn-primary:hover {
+    background: linear-gradient(#b6b6b6,#959595);
+    text-shadow: 1px 1px 1px #777;
+    color: #fff;
+    border-color: #888;
 }
+
+.buttons {
+    text-align:center;
+    margin:1.5em auto;
+    border: 1px solid transparent;
+}
+
+/**
+ * Heading Styles
+ */
+h1 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Roboto', sans-serif;
+}
+
+h2 {
+    font-size: 1em;
+    line-height: 1.2em;
+    letter-spacing: .05em;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+
+body p {
+    font-size: 14px;
+}
+
+ol > li {
+    font-size: 14px;
+}
+
+ul > li {
+    font-size: 14px;
+}
+
+.page-wrapper {
+    display: block;
+    position: absolute;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    background-color: white;
+    height: 842px;
+    overflow-y: scroll;
+    top: 5px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+body::-webkit-scrollbar {
+    width: 20px;
+}
+
+body::-webkit-scrollbar-track {
+    background-color: black;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #4e4e4e;
+    border-radius: 25px;
+}
+
 .hidden {
     display:none;
 }
 #content {
-    max-width: 600px;
-    margin: 0 auto;
-    margin-bottom: 3em;
+    max-width: 595px;
+    margin: 3em auto 3em;
     padding: 0 2em;
     background: #fff;
 }
-h1 {
-    font-size: 2em;
-    line-height: 1.2em;
-    letter-spacing: 0.15em;
-    font-family: "Arapey", serif;
-    font-weight: normal;
-    margin: 1em 0;
-    position: relative;
-    text-align: center;
-    text-transform: uppercase;
-    padding: .5em 0;
-}
-h2 {
-    font-size:1.2em;
-    line-height:1.2em;
-    letter-spacing:.05em;
-    font-family:"Open Sans Condensed",sans-serif;
-    font-weight:700;
-}
+
 #signature {
     width:auto;
     /*border:dashed 2px #53777A;*/
@@ -60,11 +129,11 @@ h2 {
 }
 #hk,
 #dev_signature {
-    max-width:333px;
+    max-width:280px;
     display:block;
 }
 #date-ip > p {
-    font-family:"Open Sans Condensed",sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight:400;
 }
 #print-pdf {
@@ -73,22 +142,9 @@ h2 {
     margin-top:2em;
     border-top:solid 1px #ccc;
 }
-.buttons {
-    text-align:center;
-    margin:1.5em auto;
-}
-button {
-    margin: 0 .5em;
-    font-size:1.2em;
-    line-height:1.5em;
-    font-family: "Open Sans Condensed",sans-serif;
-    font-weight: 700;
-    text-transform:uppercase;
-    color: #0a3666;
-}
-button:hover {
-    color: #136fd2;
-}
+/**
+ * Fonts
+ */
 
 /* arapey-regular - latin */
 @font-face {
@@ -130,6 +186,7 @@ button:hover {
     url('./fonts/libre-baskerville-v9-latin-ext_latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
     url('./fonts/libre-baskerville-v9-latin-ext_latin-regular.svg#LibreBaskerville') format('svg'); /* Legacy iOS */
 }
+
 /* libre-baskerville-italic - latin-ext_latin */
 @font-face {
     font-family: 'Libre Baskerville';
@@ -143,6 +200,7 @@ button:hover {
     url('./fonts/libre-baskerville-v9-latin-ext_latin-italic.ttf') format('truetype'), /* Safari, Android, iOS */
     url('./fonts/libre-baskerville-v9-latin-ext_latin-italic.svg#LibreBaskerville') format('svg'); /* Legacy iOS */
 }
+
 /* libre-baskerville-700 - latin-ext_latin */
 @font-face {
     font-family: 'Libre Baskerville';
@@ -170,6 +228,7 @@ button:hover {
     url('./fonts/open-sans-condensed-v15-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-300.ttf') format('truetype'), /* Safari, Android, iOS */
     url('./fonts/open-sans-condensed-v15-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-300.svg#OpenSansCondensed') format('svg'); /* Legacy iOS */
 }
+
 /* open-sans-condensed-700 - vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic */
 @font-face {
     font-family: 'Open Sans Condensed';
@@ -183,6 +242,7 @@ button:hover {
     url('./fonts/open-sans-condensed-v15-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-700.ttf') format('truetype'), /* Safari, Android, iOS */
     url('./fonts/open-sans-condensed-v15-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-700.svg#OpenSansCondensed') format('svg'); /* Legacy iOS */
 }
+
 /* open-sans-condensed-300italic - vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic */
 @font-face {
     font-family: 'Open Sans Condensed';
@@ -210,6 +270,7 @@ button:hover {
     url('./fonts/open-sans-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-300.ttf') format('truetype'), /* Safari, Android, iOS */
     url('./fonts/open-sans-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-300.svg#OpenSans') format('svg'); /* Legacy iOS */
 }
+
 /* open-sans-300italic - vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic */
 @font-face {
     font-family: 'Open Sans';
@@ -223,6 +284,7 @@ button:hover {
     url('./fonts/open-sans-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-300italic.ttf') format('truetype'), /* Safari, Android, iOS */
     url('./fonts/open-sans-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-300italic.svg#OpenSans') format('svg'); /* Legacy iOS */
 }
+
 /* open-sans-regular - vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic */
 @font-face {
     font-family: 'Open Sans';
@@ -236,6 +298,7 @@ button:hover {
     url('./fonts/open-sans-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-regular.ttf') format('truetype'), /* Safari, Android, iOS */
     url('./fonts/open-sans-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-regular.svg#OpenSans') format('svg'); /* Legacy iOS */
 }
+
 /* open-sans-italic - vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic */
 @font-face {
     font-family: 'Open Sans';
@@ -249,6 +312,7 @@ button:hover {
     url('./fonts/open-sans-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-italic.ttf') format('truetype'), /* Safari, Android, iOS */
     url('./fonts/open-sans-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-italic.svg#OpenSans') format('svg'); /* Legacy iOS */
 }
+
 /* open-sans-600italic - vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic */
 @font-face {
     font-family: 'Open Sans';
@@ -262,6 +326,7 @@ button:hover {
     url('./fonts/open-sans-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-600italic.ttf') format('truetype'), /* Safari, Android, iOS */
     url('./fonts/open-sans-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-600italic.svg#OpenSans') format('svg'); /* Legacy iOS */
 }
+
 /* open-sans-600 - vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic */
 @font-face {
     font-family: 'Open Sans';
@@ -275,6 +340,7 @@ button:hover {
     url('./fonts/open-sans-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-600.ttf') format('truetype'), /* Safari, Android, iOS */
     url('./fonts/open-sans-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-600.svg#OpenSans') format('svg'); /* Legacy iOS */
 }
+
 /* open-sans-700 - vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic */
 @font-face {
     font-family: 'Open Sans';
@@ -288,6 +354,7 @@ button:hover {
     url('./fonts/open-sans-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-700.ttf') format('truetype'), /* Safari, Android, iOS */
     url('./fonts/open-sans-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-700.svg#OpenSans') format('svg'); /* Legacy iOS */
 }
+
 /* open-sans-800 - vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic */
 @font-face {
     font-family: 'Open Sans';
@@ -301,6 +368,7 @@ button:hover {
     url('./fonts/open-sans-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-800.ttf') format('truetype'), /* Safari, Android, iOS */
     url('./fonts/open-sans-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-800.svg#OpenSans') format('svg'); /* Legacy iOS */
 }
+
 /* open-sans-700italic - vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic */
 @font-face {
     font-family: 'Open Sans';
@@ -314,6 +382,7 @@ button:hover {
     url('./fonts/open-sans-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-700italic.ttf') format('truetype'), /* Safari, Android, iOS */
     url('./fonts/open-sans-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-700italic.svg#OpenSans') format('svg'); /* Legacy iOS */
 }
+
 /* open-sans-800italic - vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic */
 @font-face {
     font-family: 'Open Sans';
@@ -326,5 +395,21 @@ button:hover {
     url('./fonts/open-sans-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-800italic.woff') format('woff'), /* Modern Browsers */
     url('./fonts/open-sans-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-800italic.ttf') format('truetype'), /* Safari, Android, iOS */
     url('./fonts/open-sans-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-800italic.svg#OpenSans') format('svg'); /* Legacy iOS */
+}
+
+/**
+ * Media Queries
+ */
+@media (max-width:600px) {
+    body { font-size:14px; }
+}
+@media print,dompdf {
+    .noprint {
+        display:none !important;
+    }
+    @page {
+        size: A4;
+        margin: 0;
+    }
 }
 

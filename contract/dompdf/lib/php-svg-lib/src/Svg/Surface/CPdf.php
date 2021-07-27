@@ -1527,7 +1527,7 @@ EOT;
                     't'    => 'javascript',
                     'info' => array(
                         'S'  => '/JavaScript',
-                        'JS' => '(' . $this->filterText($code) . ')',
+                        'js' => '(' . $this->filterText($code) . ')',
                     )
                 );
                 break;

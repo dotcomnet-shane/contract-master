@@ -199,13 +199,15 @@ function generateHtml($signed = false)
     global $html_content;
     global $htmlFooter;
 
-    $html_header = '<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Signed Contract</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="robots" content="noindex">';
+    $html_header = '
+        <!DOCTYPE html>
+            <html>
+            <head>
+            <meta charset="UTF-8">
+            <title>Signed Contract</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+            <meta name="robots" content="noindex">
+    ';
 
     if($signed)
     {
@@ -220,7 +222,7 @@ function generateHtml($signed = false)
 
 <body>
 
-<div id="content">
+<div class="page-wrapper" id="content">
 
 ';
 
@@ -253,9 +255,10 @@ function generateJs($signed = false)
     else
     {
         return '
-<script src="./JS/jquery-3.6.0.min.js"></script>
+<script src="./js/jquery-3.6.0.min.js"></script>
+<script src="https://kit.fontawesome.com/bfd9897846.js" crossorigin="anonymous"></script>
 <!-- https://github.com/brinley/jSignature/blob/master/README.md -->
-<script src="./JS/jSignature.min.js"></script>
+<script src="./js/jSignature.min.js"></script>
 <script>
 $(document).ready(function() {
 $("#signature").jSignature({
@@ -376,10 +379,10 @@ function setHtmlFooter($signed = false)
       </div>
     
       <div class="noprint" id="print-pdf">
-        <button id="print" type="button" class="button-secondary" onclick="printContract()">
+        <button id="print" type="button" class="btn-primary" onclick="printContract()">
         Print contract
         </button>
-        <button id="pdf" type="button" class="button-secondary" onclick="generatePdf()">
+        <button id="pdf" type="button" class="btn-primary" onclick="generatePdf()">
         Download as PDF
         </button>
       </div>
@@ -403,8 +406,8 @@ function setHtmlFooter($signed = false)
     <div id="signatory">' . $signatoryName . '</div>
 
     <div class="buttons">
-      <button id="reset" type="button">Reset</button>
-      <button id="submit" type="submit">Done &rarr;</button>
+      <button class="btn-primary" id="reset" type="button">Reset</button>
+      <button class="btn-primary" id="submit" type="submit">Done <i class="fas fa-arrow-right"></i></button>
       <p>';
 
         $htmlFooter .= date('d-m-Y h:m');

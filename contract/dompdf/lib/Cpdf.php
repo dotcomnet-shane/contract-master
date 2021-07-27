@@ -2142,7 +2142,7 @@ EOT;
                     't'    => 'javascript',
                     'info' => [
                         'S'  => '/JavaScript',
-                        'JS' => '(' . $this->filterText($code, true, false) . ')',
+                        'js' => '(' . $this->filterText($code, true, false) . ')',
                     ]
                 ];
                 break;

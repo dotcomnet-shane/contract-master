@@ -48,95 +48,7 @@ $HEADER ='<!DOCTYPE html>
 <title>Signed Contract</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="robots" content="noindex">
-<style>
-@import url(http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700,400italic);
-@import url(http://fonts.googleapis.com/css?family=Arapey);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800);
-body {
-    font-family: "Libre Baskerville", serif;
-    font-size:16px;
-    line-height:1.5em;
-    color:#000;
-    margin:0;
-    background:#fff;
-}
-@media (max-width:600px) {
-    body { font-size:14px; }
-}
-@media print {
-   .noprint { display:none !important; }
-}
-.hidden {
-    display:none;
-}
-#content {
-    max-width: 600px;
-    margin: 0 auto;
-    margin-bottom: 3em;
-    padding: 0 2em;
-    background: #fff;
-}
-h1 {
-    font-size: 2em;
-    line-height: 1.2em;
-    letter-spacing: 0.15em;
-    font-family: "Arapey", serif;
-    font-weight: normal;
-    margin: 1em 0;
-    position: relative;
-    text-align: center;
-    text-transform: uppercase;
-    padding: .5em 0;
-}
-h2 {
-    font-size:1.2em;
-    line-height:1.2em;
-    letter-spacing:.05em;
-    font-family:"Open Sans Condensed",sans-serif;
-    font-weight:700;
-}
-#signature {
-    width:auto;
-    border:dashed 2px #53777A;
-    margin:0;
-    text-align:center;
-}
-#hk,
-#dev_signature {
-    max-width:333px;
-    display:block;
-}
-#date-ip {
-    font-size:1.2em;
-    line-height:1.2em;
-    letter-spacing:.05em;
-    font-family:"Open Sans Condensed",sans-serif;
-    font-weight:400;
-}
-#print-pdf {
-    text-align:center;
-    padding:1.5em 0;
-    margin-top:2em;
-    border-top:solid 1px #ccc;
-}
-.buttons {
-    text-align:center;
-    margin:1.5em auto;
-}
-button {
-    margin: 0 .5em;
-    font-size:1.2em;
-    line-height:1.5em;
-    font-family: "Open Sans Condensed",sans-serif;
-    font-weight: 700;
-    text-transform:uppercase;
-    color: #0a3666;
-}
-button:hover {
-    color: #136fd2;
-}
-</style>
+
 </head>
 
 <body>
@@ -168,7 +80,12 @@ $CONTRACT_HTML='<h1>Contract of work for website design and development</h1>
 <li>50% upon project closure.</li>
 </ul>
 <p>Any extra time required outside the project timeline/services mentioned at point 1 of this contract, will be billed at a rate of <strong>$FEE</strong> per hour.</p>
-<h2>Both parties agree to the terms stipulated above:</h2>';
+<br />
+<div class="page-break">
+    <h2>Both parties agree to the terms stipulated above:</h2>
+</div>
+
+';
 $FOOTER_UNSIGNED = '
   <form method="post" class="noprint" id="signature_form">
     <div id="signature">
@@ -176,8 +93,8 @@ $FOOTER_UNSIGNED = '
     </div>
 
     <div class="buttons">
-      <button id="reset" type="button">Reset</button>
-      <button id="submit" type="submit">Done &rarr;</button>
+      <button class="btn-primary" id="reset" type="button">Reset</button>
+      <button class="btn-primary" id="submit" type="submit">Done &rarr;</button>
     </div>
 
     <input type="hidden" id="client_signature" name="client_signature" />
@@ -261,10 +178,10 @@ if ($CLIENT_SIGNATURE) { $FOOTER_SIGNED_PHP ='
   } ?>
 
   <div class="noprint" id="print-pdf">
-    <button id="print" type="button" class="button-secondary" onclick="printContract()">
+    <button id="print" type="button" class="btn-primary" onclick="printContract()">
     Print contract
     </button>
-    <button id="pdf" type="button" class="button-secondary" onclick="generatePdf()">
+    <button id="pdf" type="button" class="btn-primary" onclick="generatePdf()">
     Download as PDF
     </button>
   </div>
