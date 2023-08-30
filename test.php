@@ -159,5 +159,5 @@ else
     session_destroy();
     header('location: ' . $htmlFileLocation . '#hk');
 
-    die();
+    die(1234);
  }
